@@ -22,13 +22,13 @@ namespace FishingTokens.Items
 			item.rare = ItemRarityID.Orange;
 		}
 
-        public override void ModifyTooltips(List<TooltipLine> tooltips)
-        {
-			var priceTooltip = tooltips.Find(item => item.Name == "Price");
+		public override void ModifyTooltips(List<TooltipLine> tooltips)
+		{
+			var priceTooltip = tooltips.Find(line => line.Name == "Price");
 			if (priceTooltip != null)
-            {
+			{
 				tooltips.Remove(priceTooltip);
-            }
-        }
-    }
+			}
+		}
+	}
 }
