@@ -36,7 +36,7 @@ namespace FishingTokens.NPCs
 
 			c.GotoNext(i => i.MatchCall(typeof(NPCLoader), nameof(NPCLoader.OnChatButtonClicked)));
 
-			c.GotoNext(i => i.MatchLdcI4(369));
+			c.GotoNext(i => i.MatchLdcI4(NPCID.Angler));
 			c.GotoNext();
 			c.GotoNext();
 
@@ -83,7 +83,7 @@ namespace FishingTokens.NPCs
 			c.Emit(OpCodes.Ldfld, typeof(Player).GetField(nameof(Player.talkNPC)));
 			c.Emit(OpCodes.Ldelem_Ref);
 			c.Emit(OpCodes.Ldfld, typeof(NPC).GetField(nameof(NPC.type)));
-			c.Emit(OpCodes.Ldc_I4, 369);
+			c.Emit(OpCodes.Ldc_I4, NPCID.Angler);
 			c.Emit(OpCodes.Bne_Un, nextNpcSecondButtonLabel);
 
 			// Go to Angler Quest label
