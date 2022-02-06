@@ -43,14 +43,17 @@ namespace FishingTokens.NPCs
 			c.Remove();
 			c.Emit(OpCodes.Ldc_I4_S, (sbyte)24);
 
-			c.Index += 4;
+			c.GotoNext();
+			c.GotoNext();
+			c.GotoNext();
+			c.GotoNext();
 
 			//Add Quest button
 			c.Emit(OpCodes.Ldsfld, typeof(Lang).GetField(nameof(Lang.inter)));
 			c.Emit(OpCodes.Ldc_I4_S, (sbyte)64);
 			c.Emit(OpCodes.Ldelem_Ref);
-			c.Emit(OpCodes.Callvirt, typeof(LocalizedText).GetProperty(nameof(LocalizedText.Value)));
-			c.Emit(OpCodes.Stloc_S, "V_10");
+			c.Emit(OpCodes.Callvirt, typeof(LocalizedText).GetMethod("get_Value"));
+			c.Emit(OpCodes.Stloc_S, (byte)10);
 
 			c.GotoNext(i => i.MatchCall(typeof(NPCLoader), nameof(NPCLoader.OnChatButtonClicked)));
 
