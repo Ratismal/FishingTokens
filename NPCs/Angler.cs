@@ -34,6 +34,24 @@ namespace FishingTokens.NPCs
 			var anglerQuestLabel = c.DefineLabel();
 			var nextNpcSecondButtonLabel = c.DefineLabel();
 
+			c.GotoNext(i => i.MatchLdsfld(typeof(Lang), nameof(Lang.inter)));
+
+			c.GotoNext(i => i.MatchLdcI4(NPCID.Angler));
+			
+			// Change first button to Shop
+			c.GotoNext(i => i.MatchLdcI4(64));
+			c.Remove();
+			c.Emit(OpCodes.Ldc_I4_S, (sbyte)24);
+
+			c.Index += 4;
+
+			//Add Quest button
+			c.Emit(OpCodes.Ldsfld, typeof(Lang).GetField(nameof(Lang.inter)));
+			c.Emit(OpCodes.Ldc_I4_S, (sbyte)64);
+			c.Emit(OpCodes.Ldelem_Ref);
+			c.Emit(OpCodes.Callvirt, typeof(LocalizedText).GetProperty(nameof(LocalizedText.Value)));
+			c.Emit(OpCodes.Stloc_S, "V_10");
+
 			c.GotoNext(i => i.MatchCall(typeof(NPCLoader), nameof(NPCLoader.OnChatButtonClicked)));
 
 			c.GotoNext(i => i.MatchLdcI4(NPCID.Angler));
