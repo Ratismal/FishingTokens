@@ -27,7 +27,6 @@ namespace FishingTokens
         [Range(0, 20)]
         [DefaultValue(2)]
         [Slider]
-        [ReloadRequired]
         public int tokenMin;
 
         [Label("Maximum Fishing Tokens")]
@@ -35,7 +34,6 @@ namespace FishingTokens
         [Range(0, 20)]
         [DefaultValue(6)]
         [Slider]
-        [ReloadRequired]
         public int tokenMax;
 
         [Header("Bonuses")]
@@ -45,7 +43,6 @@ namespace FishingTokens
         [Range(0, 20)]
         [DefaultValue(1)]
         [Slider]
-        [ReloadRequired]
         public int tokenExpertBonus;
 
         [Label("Scale Bonus")]
@@ -53,7 +50,6 @@ namespace FishingTokens
         [Range(0, 20)]
         [DefaultValue(1)]
         [Slider]
-        [ReloadRequired]
         public int tokenScaleBonus;
 
         [OnDeserialized]

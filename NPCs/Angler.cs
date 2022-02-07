@@ -139,12 +139,6 @@ namespace FishingTokens.NPCs
 			}
 		}
 
-		public override bool Autoload(ref string name)
-		{
-			IL.Terraria.Main.GUIChatDrawInner += Main_GUIChatDrawInner;
-			return base.Autoload(ref name);
-		}
-
 		private void Main_GUIChatDrawInner(MonoMod.Cil.ILContext il)
 		{
 			var c = new ILCursor(il);
@@ -230,34 +224,49 @@ namespace FishingTokens.NPCs
 
 			c.MarkLabel(nextNpcSecondButtonLabel);
 		}
-		
+
+		public override bool Autoload(ref string name)
+		{
+			IL.Terraria.Main.GUIChatDrawInner += Main_GUIChatDrawInner;
+			IL.Terraria.Player.GetAnglerReward += Player_GetAnglerReward;
+			return base.Autoload(ref name);
+		}
+
 		private void Player_GetAnglerReward(MonoMod.Cil.ILContext il)
-        {
+		{
 			var c = new ILCursor(il);
 
 			var skipRewardsLabel = c.DefineLabel();
+			var endOfIfLabel = c.DefineLabel();
 
+			// Go to the 75 check
 			c.GotoNext(i => i.MatchLdcI4(75));
+			// Since this is an else-if statement, we actually want to go a bit back to the branch statement that brought us here (bne.un.s at IL_00F7).
+			c.GotoPrev(i => i.OpCode == OpCodes.Bne_Un_S);
+			// Now that we're here, we're going to forward this to the end of the if chunk (IL_0538). This turns the else-if into a straight else.
+			c.Emit(OpCodes.Bne_Un_S, endOfIfLabel);
+			c.Remove();
 
-			c.GotoPrev();
-			c.GotoPrev();
+			// Skip to the end of the primary if statement chunk (IL_0538)
+			c.GotoNext(i => i.OpCode == OpCodes.Ldloc_0);
+			// We are currently on a ldloc.0 statement (rewardItems) - we will exploit this
+			c.MarkLabel(endOfIfLabel);
+			c.GotoNext();
+			// Push the player instance (this)
+			c.Emit(OpCodes.Ldarg_0);
+			// We now have (rewardItems, this) allocated to stack, call FishingTokens.TokenRewards(List<Item> rewardItems, Player player)
+			c.Emit(OpCodes.Call, typeof(FishingTokens).GetMethod(nameof(FishingTokens.TokenRewards)));
+			// Skip rewards to the bait section
+			c.Emit(OpCodes.Br_S, skipRewardsLabel);
+			// Probably don't need this, but since we hijacked the initial ldloc.0 statement I wanted to remove the next two commands that relied on it
+			c.Remove();
+			c.Remove();
 
 			// Skip all rewards until bait
-			c.Emit(OpCodes.Br, skipRewardsLabel);
-
 			c.GotoNext(i => i.MatchLdcI4(2676));
 			c.GotoPrev(i => i.MatchLdsfld(typeof(Main), nameof(Main.rand)));
 			c.GotoPrev(i => i.MatchLdsfld(typeof(Main), nameof(Main.rand)));
-
 			c.MarkLabel(skipRewardsLabel);
-
-			c.GotoNext();
-
-			// New rewards
-			c.Emit(OpCodes.Ldfld, typeof(Player).GetField(nameof(Player.anglerQuestsFinished)));
-			c.Emit(OpCodes.Ldloc_0);
-			c.Emit(OpCodes.Call, typeof(FishingTokens).GetMethod(nameof(FishingTokens.TokenRewards)));
-
 		}
 	}
 }

@@ -19,7 +19,7 @@ namespace FishingTokens
 			// Config
 			config = GetConfig("RewardConfig") as RewardConfig;
 		}
-		public static void TokenRewards(int anglerQuestsFinished, List<Item> rewardItems)
+		public static void TokenRewards(List<Item> rewardItems, Player player)
 		{
 			Item item6 = new Item();
 			int tokenmin = config.tokenMin;
@@ -27,15 +27,15 @@ namespace FishingTokens
 			int tokenexpertbonus = config.tokenExpertBonus;
 			int tokenscalebonus = config.tokenScaleBonus;
 			int tokenquestscale;
-			if (anglerQuestsFinished >= 75)
+			if (player.anglerQuestsFinished >= 75)
 			{
 				tokenquestscale = 5;
 			}
 			else
 			{
-				tokenquestscale = anglerQuestsFinished / 15;
+				tokenquestscale = player.anglerQuestsFinished / 15;
 			}
-				int num3 = Main.rand.Next(tokenmin, tokenmax);
+			int num3 = Main.rand.Next(tokenmin, tokenmax);
 			num3 += tokenscalebonus* tokenquestscale;
 			if (Main.expertMode)
 			{
