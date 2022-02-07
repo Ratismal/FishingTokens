@@ -230,5 +230,34 @@ namespace FishingTokens.NPCs
 
 			c.MarkLabel(nextNpcSecondButtonLabel);
 		}
+		
+		private void Player_GetAnglerReward(MonoMod.Cil.ILContext il)
+        {
+			var c = new ILCursor(il);
+
+			var skipRewardsLabel = c.DefineLabel();
+
+			c.GotoNext(i => i.MatchLdcI4(75));
+
+			c.GotoPrev();
+			c.GotoPrev();
+
+			// Skip all rewards until bait
+			c.Emit(OpCodes.Br, skipRewardsLabel);
+
+			c.GotoNext(i => i.MatchLdcI4(2676));
+			c.GotoPrev(i => i.MatchLdsfld(typeof(Main), nameof(Main.rand)));
+			c.GotoPrev(i => i.MatchLdsfld(typeof(Main), nameof(Main.rand)));
+
+			c.MarkLabel(skipRewardsLabel);
+
+			c.GotoNext();
+
+			// New rewards
+			c.Emit(OpCodes.Ldfld, typeof(Player).GetField(nameof(Player.anglerQuestsFinished)));
+			c.Emit(OpCodes.Ldloc_0);
+			c.Emit(OpCodes.Call, typeof(FishingTokens).GetMethod(nameof(FishingTokens.TokenRewards)));
+
+		}
 	}
 }
