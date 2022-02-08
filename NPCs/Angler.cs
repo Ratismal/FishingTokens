@@ -30,15 +30,15 @@ namespace FishingTokens.NPCs
 
 				// Potions
 				shop.item[nextSlot].SetDefaults(ItemID.FishingPotion);
-				shop.item[nextSlot].shopCustomPrice = 1;
+				shop.item[nextSlot].shopCustomPrice = 2;
 				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.SonarPotion);
-				shop.item[nextSlot].shopCustomPrice = 1;
+				shop.item[nextSlot].shopCustomPrice = 2;
 				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.CratePotion);
-				shop.item[nextSlot].shopCustomPrice = 1;
+				shop.item[nextSlot].shopCustomPrice = 2;
 				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
 				nextSlot++;
 
@@ -119,21 +119,21 @@ namespace FishingTokens.NPCs
 				nextSlot++;
 
 				// Costumes
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Taiyaki>());
-				shop.item[nextSlot].shopCustomPrice = 15;
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<MermaidSet>());
+				shop.item[nextSlot].shopCustomPrice = 13;
 				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
 				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Taiyaki>());
-				shop.item[nextSlot].shopCustomPrice = 15;
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<FishSet>());
+				shop.item[nextSlot].shopCustomPrice = 13;
 				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
 				nextSlot++;
 
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Taiyaki>());
-				shop.item[nextSlot].shopCustomPrice = 7;
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<NauticalTreasureBox>());
+				shop.item[nextSlot].shopCustomPrice = 8;
 				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Taiyaki>());
-				shop.item[nextSlot].shopCustomPrice = 5;
+				shop.item[nextSlot].shopCustomPrice = 7;
 				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
 				nextSlot++;
 			}
