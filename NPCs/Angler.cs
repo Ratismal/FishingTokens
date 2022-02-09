@@ -1,6 +1,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.Config;
 using FishingTokens.Items;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
@@ -15,30 +16,60 @@ namespace FishingTokens.NPCs
 			if (type == NPCID.Angler)
 			{
 				// Bait
-				shop.item[nextSlot].SetDefaults(ItemID.ApprenticeBait);
-				shop.item[nextSlot].shopCustomPrice = 2;
-				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.JourneymanBait);
-				shop.item[nextSlot].shopCustomPrice = 3;
-				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.MasterBait);
-				shop.item[nextSlot].shopCustomPrice = 4;
-				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
-				nextSlot++;
+				bool apprentice = false;
+				bool journeyman = false;
+				bool master = false;
+				if (FishingTokens.config.baitUnlocks == "Boss defeat milestones")
+				{
+					if (NPC.downedBoss1) { apprentice = true; }
+					if (NPC.downedBoss3) { journeyman = true; }
+					if (Main.hardMode && NPC.downedMechBoss1 && NPC.downedMechBoss2 && NPC.downedMechBoss3) { master = true; }
+				}
+				else if (FishingTokens.config.baitUnlocks == "Fishing quests completed")
+				{
+					if (Main.player[Main.myPlayer].anglerQuestsFinished >= 5) { apprentice = true; }
+					if (Main.player[Main.myPlayer].anglerQuestsFinished >= 15) { journeyman = true; }
+					if (Main.player[Main.myPlayer].anglerQuestsFinished >= 25) { master = true; }
+				}
+				else
+				{
+					apprentice = true;
+					journeyman = true;
+					master = true;
+				}
+				if (apprentice)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.ApprenticeBait);
+					shop.item[nextSlot].shopCustomPrice = 2;
+					shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
+					nextSlot++;
+				}
+				if (journeyman)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.JourneymanBait);
+					shop.item[nextSlot].shopCustomPrice = 3;
+					shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
+					nextSlot++;
+				}
+				if (master)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.MasterBait);
+					shop.item[nextSlot].shopCustomPrice = 4;
+					shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
+					nextSlot++;
+				}
 
 				// Potions
 				shop.item[nextSlot].SetDefaults(ItemID.FishingPotion);
-				shop.item[nextSlot].shopCustomPrice = 1;
+				shop.item[nextSlot].shopCustomPrice = 2;
 				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.SonarPotion);
-				shop.item[nextSlot].shopCustomPrice = 1;
+				shop.item[nextSlot].shopCustomPrice = 2;
 				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.CratePotion);
-				shop.item[nextSlot].shopCustomPrice = 1;
+				shop.item[nextSlot].shopCustomPrice = 2;
 				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
 				nextSlot++;
 
@@ -70,70 +101,91 @@ namespace FishingTokens.NPCs
 				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
 				nextSlot++;
 
+				// Based on quests
+				if (FishingTokens.config.gearUnlocks == "Always available" || Main.player[Main.myPlayer].anglerQuestsFinished >= 5)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.FuzzyCarrot);
+					shop.item[nextSlot].shopCustomPrice = 10;
+					shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
+					nextSlot++;
+				}
+				if (Main.hardMode && (FishingTokens.config.gearUnlocks == "Always available" || Main.player[Main.myPlayer].anglerQuestsFinished >= 10))
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.BottomlessBucket);
+					shop.item[nextSlot].shopCustomPrice = 20;
+					shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.SuperAbsorbantSponge);
+					shop.item[nextSlot].shopCustomPrice = 20;
+					shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.FinWings);
+					shop.item[nextSlot].shopCustomPrice = 20;
+					shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
+					nextSlot++;
+				}
+				if (FishingTokens.config.gearUnlocks == "Always available" || Main.player[Main.myPlayer].anglerQuestsFinished >= 10)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.AnglerHat);
+					shop.item[nextSlot].shopCustomPrice = 10;
+					shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
+					nextSlot++;
+				}
+				if (FishingTokens.config.gearUnlocks == "Always available" || Main.player[Main.myPlayer].anglerQuestsFinished >= 15)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.AnglerVest);
+					shop.item[nextSlot].shopCustomPrice = 10;
+					shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
+					nextSlot++;
+				}
+				if (FishingTokens.config.gearUnlocks == "Always available" || Main.player[Main.myPlayer].anglerQuestsFinished >= 20)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.AnglerPants);
+					shop.item[nextSlot].shopCustomPrice = 10;
+					shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
+					nextSlot++;
+				}
+				if (Main.hardMode && (FishingTokens.config.gearUnlocks == "Always available" || Main.player[Main.myPlayer].anglerQuestsFinished >= 25))
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.HotlineFishingHook);
+					shop.item[nextSlot].shopCustomPrice = 30;
+					shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
+					nextSlot++;
+				}
+				if (FishingTokens.config.gearUnlocks == "Always available" || Main.player[Main.myPlayer].anglerQuestsFinished >= 30)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.GoldenFishingRod);
+					shop.item[nextSlot].shopCustomPrice = 70;
+					shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
+					nextSlot++;
+				}
+
 				// Misc
-				shop.item[nextSlot].SetDefaults(ItemID.FinWings);
-				shop.item[nextSlot].shopCustomPrice = 20;
+				shop.item[nextSlot].SetDefaults(ItemID.GoldenBugNet);
+				shop.item[nextSlot].shopCustomPrice = 22;
 				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.FishHook);
 				shop.item[nextSlot].shopCustomPrice = 18;
 				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
 				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.GoldenBugNet);
-				shop.item[nextSlot].shopCustomPrice = 22;
-				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.HotlineFishingHook);
-				shop.item[nextSlot].shopCustomPrice = 30;
-				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
-				nextSlot++;
-
-				// Based on quests
-				shop.item[nextSlot].SetDefaults(ItemID.FuzzyCarrot);
-				shop.item[nextSlot].shopCustomPrice = 10;
-				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BottomlessBucket);
-				shop.item[nextSlot].shopCustomPrice = 20;
-				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.SuperAbsorbantSponge);
-				shop.item[nextSlot].shopCustomPrice = 20;
-				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.AnglerHat);
-				shop.item[nextSlot].shopCustomPrice = 10;
-				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.AnglerVest);
-				shop.item[nextSlot].shopCustomPrice = 10;
-				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.AnglerPants);
-				shop.item[nextSlot].shopCustomPrice = 10;
-				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.GoldenFishingRod);
-				shop.item[nextSlot].shopCustomPrice = 10;
-				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
-				nextSlot++;
 
 				// Costumes
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Taiyaki>());
-				shop.item[nextSlot].shopCustomPrice = 15;
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<MermaidSet>());
+				shop.item[nextSlot].shopCustomPrice = 13;
 				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
 				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Taiyaki>());
-				shop.item[nextSlot].shopCustomPrice = 15;
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<FishSet>());
+				shop.item[nextSlot].shopCustomPrice = 13;
 				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
 				nextSlot++;
 
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Taiyaki>());
-				shop.item[nextSlot].shopCustomPrice = 7;
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<NauticalTreasureBox>());
+				shop.item[nextSlot].shopCustomPrice = 8;
 				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Taiyaki>());
-				shop.item[nextSlot].shopCustomPrice = 5;
+				shop.item[nextSlot].shopCustomPrice = 7;
 				shop.item[nextSlot].shopSpecialCurrency = FishingTokens.FishingTokenCurrencyID;
 				nextSlot++;
 			}

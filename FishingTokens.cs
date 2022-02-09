@@ -12,6 +12,7 @@ namespace FishingTokens
 
 		public static int FishingTokenCurrencyID;
 		public static RewardConfig config;
+
 		public override void Load()
 		{
 			// Fishing Token currency
