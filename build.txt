@@ -1,3 +1,3 @@
 displayName = Fishing Tokens - Angler Overhaul
 author = mothbeanie, stupid cat
-version = 0.9
+version = 1.0

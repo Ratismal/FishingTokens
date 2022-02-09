@@ -6,13 +6,6 @@ namespace FishingTokens.Items
 {
 	public class Taiyaki : ModItem
 	{
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Taiyaki");
-            Tooltip.SetDefault("Minor improvements to all stats" 
-                + "\n'A sweet fish-shaped treat!'");
-        }
-
         public override void SetDefaults()
         {
             item.width = 34;

@@ -7,8 +7,8 @@ namespace FishingTokens
 {
 	public class FishingTokenCurrency : CustomCurrencySingleCoin
 	{
-		public Color TokenColor = new Color(133, 172, 226);
-		private string amountcheck;
+		public Color TokenColor = new Color(170, 191, 226);
+		public string amountcheck;
 
 		public FishingTokenCurrency(int coinItemID, long currencyCap) : base(coinItemID, currencyCap)
 		{
@@ -19,12 +19,12 @@ namespace FishingTokens
 			Color color = TokenColor * ((float)Main.mouseTextColor / 255f);
 			if (price != 1)
 			{
-				amountcheck = "fishing tokens";
+				amountcheck = Language.GetTextValue("Mods.FishingTokens.Common.CurrencyNamePlural");
             }
 			else
             {
-				amountcheck = "fishing token";
-            }
+				amountcheck = Language.GetTextValue("Mods.FishingTokens.Common.CurrencyName");
+			}
 			lines[currentLine++] = string.Format("[c/{0:X2}{1:X2}{2:X2}:{3} {4} {5}]", new object[]
 				{
 					color.R,

@@ -6,12 +6,6 @@ namespace FishingTokens.Items
 {
 	public class FishSet : ModItem
 	{
-		public override void SetStaticDefaults() 
-		{
-			DisplayName.SetDefault("Fish Costume Set");
-			Tooltip.SetDefault("<right> to open");
-		}
-
 		public override void SetDefaults() 
 		{
 			item.width = 26;

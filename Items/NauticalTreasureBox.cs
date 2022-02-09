@@ -6,13 +6,6 @@ namespace FishingTokens.Items
 {
 	public class NauticalTreasureBox : ModItem
 	{
-		public override void SetStaticDefaults() 
-		{
-			DisplayName.SetDefault("Nautical Treasure Box");
-			Tooltip.SetDefault("Contains 1-2 pieces of furniture"
-				+ "\n<right> to open");
-		}
-
 		public override void SetDefaults() 
 		{
 			item.width = 32;

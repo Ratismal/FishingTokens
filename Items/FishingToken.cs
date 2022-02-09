@@ -7,12 +7,6 @@ namespace FishingTokens.Items
 {
 	public class FishingToken : ModItem
 	{
-		public override void SetStaticDefaults() 
-		{
-			DisplayName.SetDefault("Fishing Token");
-			Tooltip.SetDefault("Can be exchanged for rewards at the Angler's shop");
-		}
-
 		public override void SetDefaults() 
 		{
 			item.width = 28;

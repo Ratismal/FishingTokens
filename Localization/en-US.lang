@@ -1,0 +1,43 @@
+ItemName.FishingToken=Fishing Token
+ItemTooltip.FishingToken=Can be exchanged for rewards at the Angler's shop
+
+ItemName.FishSet=Fish Costume Set
+ItemTooltip.FishSet=<right> to open
+
+ItemName.MermaidSet=Mermaid Set
+ItemTooltip.MermaidSet=<right> to open
+
+ItemName.NauticalTreasureBox=Nautical Treasure Box
+ItemTooltip.NauticalTreasureBox=Contains 1-2 pieces of furniture\n<right> to open
+
+ItemName.Taiyaki=Taiyaki
+ItemTooltip.Taiyaki=Minor improvements to all stats\n'A sweet fish-shaped treat!'
+
+
+Common.CurrencyName=fishing token
+Common.CurrencyNamePlural=fishing tokens
+
+
+RewardConfig.Header.AnglerShopUnlocks=Angler Shop Unlocks
+
+RewardConfig.Label.BaitUnlocks=Bait Unlocks
+RewardConfig.Tooltip.BaitUnlocks=Under what conditions will Angler's shop sell bait.\nBoss defeat milestones: Apprentice after EoC, Journeyman after Skeletron, Master after Mech Bosses
+
+RewardConfig.Label.GearUnlocks=Gear Unlocks
+RewardConfig.Tooltip.GearUnlocks=Under what conditions will Angler's shop sell items usually gated by quests (Angler Hat, Golden Fishing Rod, etc.)
+
+RewardConfig.Header.BaseReward=Base Reward
+
+RewardConfig.Label.MinimumFishingTokens=Minimum Fishing Tokens
+RewardConfig.Tooltip.MinimumFishingTokens=The minimum number of Fishing Tokens randomly chosen as a reward.
+
+RewardConfig.Label.MaximumFishingTokens=Maximum Fishing Tokens
+RewardConfig.Tooltip.MaximumFishingTokens=The maximum number of Fishing Tokens randomly chosen as a reward.
+
+RewardConfig.Header.Bonuses=Bonuses
+
+RewardConfig.Label.ExpertBonus=Expert Bonus
+RewardConfig.Tooltip.ExpertBonus=How many additional Fishing Tokens are rewarded if playing on Expert.
+
+RewardConfig.Label.ScaleBonus=Scale Bonus
+RewardConfig.Tooltip.ScaleBonus=How many additional Fishing Tokens are rewarded per every 15 quests previously completed (capped at 75 quests).
