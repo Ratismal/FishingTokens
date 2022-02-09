@@ -249,18 +249,19 @@ namespace FishingTokens.NPCs
 
 			// Skip to the end of the primary if statement chunk (IL_0538)
 			c.GotoNext(i => i.OpCode == OpCodes.Ldloc_0);
-			// We are currently on a ldloc.0 statement (rewardItems) - we will exploit this
+			// We are currently on a ldloc.0 statement (rewardItems). Skip forward to after the item is added.
 			c.MarkLabel(endOfIfLabel);
 			c.GotoNext();
-			// Push the player instance (this)
-			c.Emit(OpCodes.Ldarg_0);
+            c.GotoNext();
+            c.GotoNext();
+            // Push rewardItems again
+            c.Emit(OpCodes.Ldloc_0);
+            // Push the player instance (this)
+            c.Emit(OpCodes.Ldarg_0);
 			// We now have (rewardItems, this) allocated to stack, call FishingTokens.TokenRewards(List<Item> rewardItems, Player player)
 			c.Emit(OpCodes.Call, typeof(FishingTokens).GetMethod(nameof(FishingTokens.TokenRewards)));
-			// Skip rewards to the bait section
+            // Skip rewards to the bait section
 			c.Emit(OpCodes.Br_S, skipRewardsLabel);
-			// Probably don't need this, but since we hijacked the initial ldloc.0 statement I wanted to remove the next two commands that relied on it
-			c.Remove();
-			c.Remove();
 
 			// Skip all rewards until bait
 			c.GotoNext(i => i.MatchLdcI4(2676));
