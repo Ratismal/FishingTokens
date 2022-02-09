@@ -9,7 +9,8 @@ namespace FishingTokens.Items
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Taiyaki");
-            Tooltip.SetDefault("FISH WAFFLE LETS FUCKING GO");
+            Tooltip.SetDefault("Minor improvements to all stats" 
+                + "\n'FISH WAFFLE LETS FUCKING GO'");
         }
 
         public override void SetDefaults()
