@@ -10,13 +10,13 @@ namespace FishingTokens.Items
         {
             DisplayName.SetDefault("Taiyaki");
             Tooltip.SetDefault("Minor improvements to all stats" 
-                + "\n'FISH WAFFLE LETS FUCKING GO'");
+                + "\n'A sweet fish-shaped treat!'");
         }
 
         public override void SetDefaults()
         {
-            item.width = 900;
-            item.height = 553;
+            item.width = 34;
+            item.height = 34;
             item.useStyle = ItemUseStyleID.EatingUsing;
             item.useAnimation = 17;
             item.useTime = 17;

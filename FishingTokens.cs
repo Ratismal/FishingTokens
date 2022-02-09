@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 using Terraria.GameContent.UI;
 using Terraria.ModLoader;
 using FishingTokens.Items;
@@ -45,6 +46,14 @@ namespace FishingTokens
 			item6.SetDefaults(ModContent.ItemType<FishingToken>(), false);
 			item6.stack = num3;
 			rewardItems.Add(item6);
+
+			foreach (Item item in rewardItems.ToArray())
+            {
+				if (item.type == ItemID.None)
+                {
+					rewardItems.Remove(item);
+                }
+            }
 		}
 	}
 }
