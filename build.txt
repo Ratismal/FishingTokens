@@ -1,3 +1,5 @@
 displayName = Fishing Tokens - Angler Overhaul
 author = mothbeanie, stupid cat
 version = 1.0
+homepage = https://github.com/Ratismal/FishingTokens
+buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*
