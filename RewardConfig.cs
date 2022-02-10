@@ -10,7 +10,7 @@ namespace FishingTokens
 {
     public class RewardConfig : ModConfig
     {
-        public override ConfigScope Mode => ConfigScope.ClientSide;
+        public override ConfigScope Mode => ConfigScope.ServerSide;
 
         [Header("$Mods.FishingTokens.RewardConfig.Header.AnglerShopUnlocks")]
 
