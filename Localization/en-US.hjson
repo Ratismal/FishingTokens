@@ -1,0 +1,52 @@
+Mods: {
+	FishingTokens: {
+		ItemName: {
+			FishingToken: Fishing Token
+			FishSet: Fish Costume Set
+			MermaidSet: Mermaid Set
+			NauticalTreasureBox: Nautical Treasure Box
+			Taiyaki: Taiyaki
+		}
+
+		ItemTooltip: {
+			FishingToken: Can be exchanged for rewards at the Angler's shop
+			NauticalTreasureBox: Contains 1-2 pieces of furniture
+			Taiyaki: 'A sweet fish-shaped treat!'
+		}
+
+		Common: {
+			CurrencyName: fishing token
+			CurrencyNamePlural: fishing tokens
+		}
+
+		RewardConfig: {
+			Header: {
+				AnglerShopUnlocks: Angler Shop Unlocks
+				BaseReward: Base Reward
+				Bonuses: Bonuses
+			}
+
+			Label: {
+				BaitUnlocks: Bait Unlocks
+				GearUnlocks: Gear Unlocks
+				MinimumFishingTokens: Minimum Fishing Tokens
+				MaximumFishingTokens: Maximum Fishing Tokens
+				ExpertBonus: Expert Bonus
+				ScaleBonus: Scale Bonus
+			}
+
+			Tooltip: {
+				BaitUnlocks:
+					'''
+					Under what conditions will Angler's shop sell bait.
+					Boss defeat milestones: Apprentice after EoC, Journeyman after Skeletron, Master after Mech Bosses
+					'''
+				GearUnlocks: Under what conditions will Angler's shop sell items usually gated by quests (Angler Hat, Golden Fishing Rod, etc.)
+				MinimumFishingTokens: The minimum number of Fishing Tokens randomly chosen as a reward.
+				MaximumFishingTokens: The maximum number of Fishing Tokens randomly chosen as a reward.
+				ExpertBonus: How many additional Fishing Tokens are rewarded if playing on Expert.
+				ScaleBonus: How many additional Fishing Tokens are rewarded per every 15 quests previously completed (capped at 75 quests).
+			}
+		}
+	}
+}

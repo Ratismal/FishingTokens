@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Serialization;
 using Terraria;
-using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
 
 namespace FishingTokens
@@ -32,15 +31,15 @@ namespace FishingTokens
 
         [Label("$Mods.FishingTokens.RewardConfig.Label.MinimumFishingTokens")]
         [Tooltip("$Mods.FishingTokens.RewardConfig.Tooltip.MinimumFishingTokens")]
-        [Range(0, 20)]
-        [DefaultValue(2)]
+        [Range(0, 40)]
+        [DefaultValue(4)]
         [Slider]
         public int tokenMin;
 
         [Label("$Mods.FishingTokens.RewardConfig.Label.MaximumFishingTokens")]
         [Tooltip("$Mods.FishingTokens.RewardConfig.Tooltip.MaximumFishingTokens")]
-        [Range(0, 20)]
-        [DefaultValue(6)]
+        [Range(0, 40)]
+        [DefaultValue(14)]
         [Slider]
         public int tokenMax;
 
@@ -49,14 +48,14 @@ namespace FishingTokens
         [Label("$Mods.FishingTokens.RewardConfig.Label.ExpertBonus")]
         [Tooltip("$Mods.FishingTokens.RewardConfig.Tooltip.ExpertBonus")]
         [Range(0, 20)]
-        [DefaultValue(1)]
+        [DefaultValue(2)]
         [Slider]
         public int tokenExpertBonus;
 
         [Label("$Mods.FishingTokens.RewardConfig.Label.ScaleBonus")]
         [Tooltip("$Mods.FishingTokens.RewardConfig.Tooltip.ScaleBonus")]
         [Range(0, 20)]
-        [DefaultValue(1)]
+        [DefaultValue(2)]
         [Slider]
         public int tokenScaleBonus;
 

@@ -3,8 +3,8 @@ using Terraria;
 using Terraria.ID;
 using Terraria.GameContent.UI;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using FishingTokens.Items;
-using MonoMod.Cil;
 
 namespace FishingTokens
 {
@@ -17,7 +17,7 @@ namespace FishingTokens
 		public override void Load()
 		{
 			// Fishing Token currency
-			FishingTokenCurrencyID = CustomCurrencyManager.RegisterCurrency(new FishingTokenCurrency(ModContent.ItemType<Items.FishingToken>(), 999L));
+			FishingTokenCurrencyID = CustomCurrencyManager.RegisterCurrency(new FishingTokenCurrency(ItemType<Items.FishingToken>(), 999L));
 			// Config
 			config = GetConfig("RewardConfig") as RewardConfig;
 		}
@@ -43,7 +43,7 @@ namespace FishingTokens
 			{
 				num3 += tokenexpertbonus;
 			}
-			item6.SetDefaults(ModContent.ItemType<FishingToken>(), false);
+			item6.SetDefaults(ItemType<FishingToken>(), false);
 			item6.stack = num3;
 			rewardItems.Add(item6);
 

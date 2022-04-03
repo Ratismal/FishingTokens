@@ -6,13 +6,18 @@ namespace FishingTokens.Items
 {
 	public class NauticalTreasureBox : ModItem
 	{
-		public override void SetDefaults() 
+        public override void SetStaticDefaults()
+        {
+			Tooltip.SetDefault("{$CommonItemTooltip.RightClickToOpen}");
+		}
+
+        public override void SetDefaults() 
 		{
-			item.width = 32;
-			item.height = 22;
-			item.maxStack = 99;
-			item.value = Item.sellPrice(0, 0, 25, 0);
-			item.rare = ItemRarityID.Blue;
+			Item.width = 32;
+			Item.height = 22;
+			Item.maxStack = 99;
+			Item.value = Item.sellPrice(0, 0, 25, 0);
+			Item.rare = ItemRarityID.Blue;
 		}
 
         public override bool CanRightClick()
@@ -21,49 +26,47 @@ namespace FishingTokens.Items
         }
 
 		public override void RightClick(Player player)
-		{	
+		{
+			var source = player.GetItemSource_OpenItem(Type);
 			void NauticalTreasureBoxRewards(int reward)
 			{
 				switch (reward)
 				{
 					case 0:
-						player.QuickSpawnItem(ItemID.LifePreserver);
+						player.QuickSpawnItem(source, ItemID.LifePreserver);
 						break;
 					case 1:
-						player.QuickSpawnItem(ItemID.ShipsWheel);
+						player.QuickSpawnItem(source, ItemID.ShipsWheel);
 						break;
 					case 2:
-						player.QuickSpawnItem(ItemID.CompassRose);
+						player.QuickSpawnItem(source, ItemID.CompassRose);
 						break;
 					case 3:
-						player.QuickSpawnItem(ItemID.WallAnchor);
+						player.QuickSpawnItem(source, ItemID.WallAnchor);
 						break;
 					case 4:
-						player.QuickSpawnItem(ItemID.PillaginMePixels);
+						player.QuickSpawnItem(source, ItemID.PillaginMePixels);
 						break;
 					case 5:
-						player.QuickSpawnItem(ItemID.TreasureMap);
+						player.QuickSpawnItem(source, ItemID.TreasureMap);
 						break;
 					case 6:
-						player.QuickSpawnItem(ItemID.GoldfishTrophy);
+						player.QuickSpawnItem(source, ItemID.GoldfishTrophy);
 						break;
 					case 7:
-						player.QuickSpawnItem(ItemID.BunnyfishTrophy);
+						player.QuickSpawnItem(source, ItemID.BunnyfishTrophy);
 						break;
 					case 8:
-						player.QuickSpawnItem(ItemID.SwordfishTrophy);
+						player.QuickSpawnItem(source, ItemID.SwordfishTrophy);
 						break;
 					case 9:
-						player.QuickSpawnItem(ItemID.SharkteethTrophy);
+						player.QuickSpawnItem(source, ItemID.SharkteethTrophy);
 						break;
 					case 10:
-						player.QuickSpawnItem(ItemID.ShipInABottle);
+						player.QuickSpawnItem(source, ItemID.ShipInABottle);
 						break;
 					case 11:
-						player.QuickSpawnItem(ItemID.SeaweedPlanter);
-						break;
-					case 12:
-						player.QuickSpawnItem(ItemID.CoralstoneBlock, 50 + Main.rand.Next(101));
+						player.QuickSpawnItem(source, ItemID.SeaweedPlanter);
 						break;
 				}
 			}

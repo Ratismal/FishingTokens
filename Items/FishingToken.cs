@@ -9,11 +9,11 @@ namespace FishingTokens.Items
 	{
 		public override void SetDefaults() 
 		{
-			item.width = 28;
-			item.height = 28;
-			item.maxStack = 999;
-			item.value = 0;
-			item.rare = ItemRarityID.Orange;
+			Item.width = 28;
+			Item.height = 28;
+			Item.maxStack = 9999;
+			Item.value = 0;
+			Item.rare = ItemRarityID.Orange;
 		}
 
 		public override void ModifyTooltips(List<TooltipLine> tooltips)
